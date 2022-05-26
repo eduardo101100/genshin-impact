@@ -1,56 +1,84 @@
  import { useEffect, useState } from "react";
 import {fetchHelper} from "./helpers/fetchHelper";
 
+const tipos = {
+  artifacts:"artefactos",
+  boss:"jefes",
+  characters:"personajes",
+  consumables:"consumibles",
+  domains:"dominios",
+  elements:"elementos",
+  enemies:"enemigos",
+  materials:"materiales",
+  nations: "naciones",
+  weapons: "armas",
+};
+
 const App = ()  => { 
 
-  const tipos = {
-    artifacts:"artefactos",
-    boss:"jefes",
-    characters:"artefactos",
-    consumables:"consumibles",
-    domains:"dominios",
-    elements:"elementos",
-    enemies:"enemigos",
-    materials:"materiales",
-    nations: "naciones",
-    weapons: "armas",
-  };
-
-  const [selects, setSelects] = useState({
-    types: []
+  const [selects, setSelectets] = useState({
+    types: [],
 
   });
+//se hara la siguiente funcion generica para cualquier llamada
+const fetchTypes = async (url, item) => {
+  const respuestaJson = await fetchHelper(url);
+  const respuesta = await respuestaJson.json();
 
-const fetchTypes = async () => {
-  const respuesta = await fetchHelper("https://api.genshin.dev/")
-  const {types} = await respuesta.json()
-  console.log({types})
-  setSelects({...selects, types})
-}
+  if (item === "types"){
 
-
-
-  useEffect(() => {
-    fetchTypes().catch(console.error)
+    setSelectets({...selects, [item]: respuesta[item] });
+  }else{
+    setSelectets({...selects, [item]: respuesta});
+  };
   
-  }, []);
+  console.log (selects);
+  
+};
+
+useEffect(() => {
+  
+      fetchTypes("https://api.genshin.dev/", "types").catch(console.error);
+    
+    }, []);
+  
+    
+  
+  const handleChangeType =({target}) => {
+    fetchTypes(`https://api.genshin.dev/${target.value}`,target.value);
+  };
   
 
   return (
 
   <div className="container">
-    <h1> Genshin impact dex</h1>  
+    <h1> Genshin impact dev</h1>  
   <hr/>
-  <select>
-    <option value="artifacts">seleccione el tipo de informacion</option>
+  <select onChange={handleChangeType}>
+    <option value="">
+      seleccione el tipo de informacion</option>
    {
      selects.types.map((type) => (
-<option value={type}> {tipos[type]}</option>
-     
-     )
-     )
-   }
+<option value={type} key={type}>
+   {tipos[type]}
+   </option>
+     ))}
   </select>
+  {
+    selects.materials && (
+      <select name="materials">
+        {
+          selects.materials.map((material)=>(
+            <option value={material} key= {material}>
+              {material}
+            </option>
+          )
+          )
+        }
+
+      </select>
+    )
+  }
   </div>
   );
 };
