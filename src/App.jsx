@@ -64,6 +64,52 @@ useEffect(() => {
    </option>
      ))}
   </select>
+  
+  {
+    selects.artifacts && (
+      <select name="artifacts">
+        {
+          selects.artifacts.map((artefacts)=>(
+            <option value={artefacts} key= {artefacts}>
+              {artefacts}
+            </option>
+          )
+          )
+        }
+
+      </select>
+    )
+  }
+  {
+    selects.boss && (
+      <select name="boss">
+        {
+          selects.boss.map((jefe)=>(
+            <option value={jefe} key= {jefe}>
+              {jefe}
+            </option>
+          )
+          )
+        }
+
+      </select>
+    )
+  }
+  {
+    selects.characters && (
+      <select name="characters">
+        {
+          selects.characters.map((personaje)=>(
+            <option value={personaje} key= {personaje}>
+              {personaje}
+            </option>
+          )
+          )
+        }
+
+      </select>
+    )
+  }
   {
     selects.materials && (
       <select name="materials">
