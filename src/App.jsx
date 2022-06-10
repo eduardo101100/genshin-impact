@@ -27,9 +27,9 @@ const fetchTypes = async (url, item) => {
 
   if (item === "types"){
 
-    setSelectets({...selects, [item]: respuesta[item] });
+    setSelectets({types: respuesta[item] });
   }else{
-    setSelectets({...selects, [item]: respuesta});
+    setSelectets({types: selects.types, [item]: respuesta});
   };
   
   console.log (selects);
