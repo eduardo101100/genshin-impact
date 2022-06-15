@@ -45,7 +45,6 @@ const App = () => {
        url = `https://api.genshin.dev/${item}/${subItem}`;
      }
 
-<<<<<<< HEAD
     const respuestaJson = await fetchHelper(url);
     const respuesta = await respuestaJson.json();
     
@@ -65,11 +64,6 @@ const App = () => {
 
    
     console.log(selects);
-=======
-    setSelectets({types: respuesta[item] });
-  }else{
-    setSelectets({types: selects.types, [item]: respuesta});
->>>>>>> fc3ed89551951cb42d2895a6730f3e3b934b8fa8
   };
 
   useEffect(() => {
@@ -82,7 +76,6 @@ const App = () => {
 
  
   return (
-<<<<<<< HEAD
     <div className="container">
       <h1>Genshin Impact Dex</h1> 
       <hr />
@@ -93,79 +86,6 @@ const App = () => {
             {tipos[type]}
           </option>
         ))}
-=======
-
-  <div className="container">
-    <h1> Genshin impact dev</h1>  
-  <hr/>
-  <select onChange={handleChangeType}>
-    <option value="">
-      seleccione el tipo de informacion</option>
-   {
-     selects.types.map((type) => (
-<option value={type} key={type}>
-   {tipos[type]}
-   </option>
-     ))}
-  </select>
-  
-  {
-    selects.artifacts && (
-      <select name="artifacts">
-        {
-          selects.artifacts.map((artefacts)=>(
-            <option value={artefacts} key= {artefacts}>
-              {artefacts}
-            </option>
-          )
-          )
-        }
-
-      </select>
-    )
-  }
-  {
-    selects.boss && (
-      <select name="boss">
-        {
-          selects.boss.map((jefe)=>(
-            <option value={jefe} key= {jefe}>
-              {jefe}
-            </option>
-          )
-          )
-        }
-
-      </select>
-    )
-  }
-  {
-    selects.characters && (
-      <select name="characters">
-        {
-          selects.characters.map((personaje)=>(
-            <option value={personaje} key= {personaje}>
-              {personaje}
-            </option>
-          )
-          )
-        }
-
-      </select>
-    )
-  }
-  {
-    selects.artifacts && (
-      <select name="artifacts">
-        {
-          selects.artifacts.map((artefacts)=>(
-            <option value={artefacts} key= {artefacts}>
-              {artefacts}
-            </option>
-          )
-          )
-        } 
->>>>>>> fc3ed89551951cb42d2895a6730f3e3b934b8fa8
       </select>
       {selects.isSelected.artifacts && (
         <CustomSelect
