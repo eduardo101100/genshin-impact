@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import CustomSelect from "./components/CustomSelect";
+import { UnderContruction } from "./components/UnderConstruction";
 import { fetchHelper } from "./helpers/fetchHelper";
 
 const tipos = {
@@ -58,6 +59,7 @@ const App = () => {
           ...selects,
           [item]: respuesta,
           isSelected: { ...initialSelected, [item]: true },
+          selected: {},
         });
       }
      }
@@ -87,6 +89,7 @@ const App = () => {
           </option>
         ))}
       </select>
+      {selects.isSelected.boss && <UnderContruction />}
       {selects.isSelected.artifacts && (
         <CustomSelect
           name="artifacts"
@@ -95,14 +98,7 @@ const App = () => {
           fetchTypes={fetchTypes}
         />
       )}
-      {selects.isSelected.boss && (
-        <CustomSelect
-          name="boss"
-          label="Seleccione un jefe"
-          itemArray={selects.boss}
-          fetchTypes={fetchTypes}
-        />
-      )}
+      
       {selects.isSelected.characters && (
         <CustomSelect
           name="characters"
@@ -171,9 +167,19 @@ const App = () => {
       <div>
        
         {Object.entries(selects.selected).length !== 0 && 
+        !selects.isSelected.boss &&
          Object.entries(selects.selected).map((item) => (
           <h4>{`${item[0]}: ${item[1]}`}</h4>
         ))}
+        {selects.isSelected.boss && (
+          <div>
+            <img 
+            src="https://i.ytimg.com/vi/McRDGAxiR2k/maxresdefault.jpg" 
+            alt="Imagen: en contruccion" 
+            />
+            </div>
+        )
+         }
       </div>
     </div>
   );
